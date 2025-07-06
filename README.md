@@ -77,7 +77,7 @@ You can view the [Canva presentation](https://www.canva.com/design/DAGl44T3lBU/W
 * Abhinav Singh (230008002)
 * Garvit Kumbhat (230008014)
 * Mohak Dadhich (230008023)
-* Vighnehs Mandwaria (230008039)
+* Vighnesh Mandwaria (230008039)
 
 ## 📝 Conclusion
 
