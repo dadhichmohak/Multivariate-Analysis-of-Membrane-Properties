@@ -70,7 +70,7 @@ The goals were:
 * **Python (optional)**: For any pre/post processing or plots (not provided here)
 
 ## Presentation
-You can view the Canva presentation <a href="https://www.canva.com/design/DAGsaLUszQ8/QUg8k3LtR_weQaEZRLR6yw/edit">here</a>.
+You can view the [Canva presentation](https://www.canva.com/design/DAGl44T3lBU/WkSRb3MJeDz8vfo_PTLVsQ/edit)
 
 ## 🧑‍💻 Team Members
 
