@@ -103,36 +103,53 @@
 ## 📂 Repository Structure
 
 ```
-├── data/              # Raw & processed datasets (CSV)
-├── notebooks/         # Jupyter notebooks for EDA & modeling
-├── scripts/           # Reproducible Python pipelines
-├── figures/           # Generated plots & visuals
-└── report/            # PDF report & slide deck
+├── MLR_analysis.ipynb             # Original MLR notebook
+├── PS/MembranePROB2data.txt       # Bundled numeric data: 120 samples, 8 predictors + target
+├── PS/Group 2.pdf                # Assignment
+├── Images (Simca)/               # SIMCA visualizations
+├── Project Report Group 2 PDA.pdf
+├── requirements.in              # Selected direct Python dependencies
+├── requirements.lock            # Pinned dependencies with artifact hashes
+└── scripts/                     # Setup, notebook execution, and JupyterLab
 ```
 
 ---
 
 ## ▶️ Getting Started
 
-1. **Clone** the repository:
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Git, then run these commands in Bash on Linux or macOS:
 
-   ```bash
-   git clone https://github.com/<username>/membrane-pls.git
-   cd membrane-pls
-   ```
-2. **Create env & install deps:**
+```bash
+git clone https://github.com/Abhinav072004/Multivariate-Analysis-of-Membrane-Properties.git
+cd Multivariate-Analysis-of-Membrane-Properties
+bash scripts/setup.sh
+.venv/bin/python scripts/run-analysis.py
+```
 
-   ```bash
-   python -m venv .venv && source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
-3. **Reproduce analysis:**
+Setup installs Python 3.11.14, creates `.venv`, installs the hash-locked dependencies, and registers a notebook kernel. It can be run again to refresh the environment. It requires access to GitHub/Python download assets and PyPI. Keep your configured proxy and CA trust; installation verifies TLS and artifact hashes.
 
-   ```bash
-   jupyter notebook notebooks/01_pls_analysis.ipynb
-   ```
+The analysis helper executes a generated copy of `MLR_analysis.ipynb` from a clean kernel. It supplies the bundled dataset and redirects the original Google Drive CSV read to that local file, preserving the original notebook. This handles two existing notebook issues: an undefined `dataset` variable and a hard-coded `/content/drive/MyDrive/new.csv` path. Running the original notebook directly still requires those inputs.
 
----
+Successful execution checks all 120 samples, eight predictor-count cross-validation calculations, finite predictions and residuals, and six diagnostic/validation plots. It writes:
 
+- `outputs/MLR_analysis.executed.ipynb` — executed notebook with the local input adapter.
+- `outputs/MLR_analysis.html` — shareable rendered analysis.
+- `outputs/readiness.json` — current validation results and model metrics.
 
+On the bundled data, the Python MLR workflow gives training R² ≈ 0.468477 and five-fold Q² ≈ 0.319124. The PLS/SIMCA results reported above belong to the separate course-project report; this repository does not contain an executable Python PLS implementation. SIMCA is proprietary and optional for the Python workflow.
 
+### Interactive notebooks
+
+```bash
+bash scripts/start-jupyter.sh
+```
+
+JupyterLab uses token authentication on loopback port 8888. Open `outputs/MLR_analysis.executed.ipynb` and select the **Python (Membrane)** kernel. Start the server again in each new session; installed files persist, running processes do not.
+
+Environment folders, runtime files, and generated outputs are ignored by Git. To update the dependency lock intentionally:
+
+```bash
+uv pip compile --python 3.11.14 --generate-hashes requirements.in -o requirements.lock
+bash scripts/setup.sh
+.venv/bin/python scripts/run-analysis.py
+```
